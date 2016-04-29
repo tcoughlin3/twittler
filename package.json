@@ -1,0 +1,22 @@
+{
+  "name": "twittler",
+  "version": "1.0.0",
+  "description": "a place for twits",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tcoughlin3/hrf1-twittler.git"
+  },
+  "author": "Tom Coughlin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tcoughlin3/hrf1-twittler/issues"
+  },
+  "homepage": "https://github.com/tcoughlin3/hrf1-twittler#readme",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}

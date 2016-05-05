@@ -33,3 +33,7 @@ bower_components/
 .floobit
 .floo
 .flooignore
+
+.DS_Store
+
+.gitignore

@@ -24,7 +24,7 @@ function initTweets(num) {
   _.each(recent, showTweet);
 }
 
-function moreTweets() {
+var moreTweets = function (event) {
   $('#tweets').empty();
   initTweets(12);
 }
@@ -35,9 +35,11 @@ function updateTime() {
     var timeFromNow = moment(time).fromNow();
     $(this).text(timeFromNow);
   });
-
-
 }
+
+function login() {}
+
+function newTweet() {}
 
 function initPage(){
 
@@ -51,17 +53,24 @@ function initPage(){
     <img src="twit.jpg"></div></div>');
   var $tweetContainer = $('<div class="container"><div class="table-responsive"><table class="table">\
     <tbody id="tweets"></tbody><table></div></div>');
-  // $('<div class="container"><button type="button" class="btn btn-default btn-lg" id="more">\
-  //    Get More</button><div class="form-group col-sm-8"><form><label class="control-label col-sm-1" for="tweet">Make Tweet:</label>\
-  //    <div class="col-sm-6"><input type="tweet" class="form-control" id="tweet" placeholder="Twit">\
-  //    </form></div></div></div><br>').appendTo($body);
+  var $features = $('<br><div class="container"><form class="form-inline"><div class="form-group">\
+    <input class="btn btn-default" id="more" type="button" value="Load More"></div>\
+    <div class="form-group"><input type="text" class="form-control login" placeholder="Enter your name"></div>\
+    <div class="form-group"><input type="text" class="form-control new-tweet" placeholder="Whats happening?"></div>\
+    <button type="submit" class="btn btn-default login" id="login-button">Log In</button>\
+    <button type="submit" class="btn btn-default new-tweet" id="new-tweet-button">Tweet</button>\
+    </form></div><br>');
 
+  appendElements($header, $features, $tweetContainer);
 
-  appendElements($header, $tweetContainer);
+  var loggedIn = false;
+  $('.new-tweet').hide();
 
   initTweets(12);
 
-  $('#more').on('click', moreTweets);
+  $('#more').click(moreTweets);
+  $('login-button').click(login);
+  $('new-tweet-button').click(newTweet);
 }
 
 $(document).ready(initPage);

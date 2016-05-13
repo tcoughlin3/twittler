@@ -37,9 +37,18 @@ function updateTime() {
   });
 }
 
-function login() {}
+function login() {
+  visitor = $('#login').val().toLowerCase();
+  $('.new-tweet').show();
+  $('.login').hide();
+}
 
-function newTweet() {}
+function newTweet() {
+  var $newTweet = $('#new-tweet');
+  var message = $newTweet.val();
+  writeTweet(message);
+  $newTweet.prop('value', 'Whats happening?');
+}
 
 function initPage(){
 
@@ -55,22 +64,23 @@ function initPage(){
     <tbody id="tweets"></tbody><table></div></div>');
   var $features = $('<br><div class="container"><form class="form-inline"><div class="form-group">\
     <input class="btn btn-default" id="more" type="button" value="Load More"></div>\
-    <div class="form-group"><input type="text" class="form-control login" placeholder="Enter your name"></div>\
-    <div class="form-group"><input type="text" class="form-control new-tweet" placeholder="Whats happening?"></div>\
-    <button type="submit" class="btn btn-default login" id="login-button">Log In</button>\
-    <button type="submit" class="btn btn-default new-tweet" id="new-tweet-button">Tweet</button>\
+    <div class="form-group"><input type="text" class="form-control login" id="login" placeholder="Enter your name"></div>\
+    <div class="form-group"><input type="text" class="form-control new-tweet" id="new-tweet" placeholder="Whats happening?"></div>\
+    <input type="button" class="btn btn-default login" id="login-button" value="Log In">\
+    <input type="button" class="btn btn-default new-tweet" id="new-tweet-button" value="Tweet">\
     </form></div><br>');
 
   appendElements($header, $features, $tweetContainer);
 
-  var loggedIn = false;
+  var visitor;
+
   $('.new-tweet').hide();
 
   initTweets(12);
 
   $('#more').click(moreTweets);
-  $('login-button').click(login);
-  $('new-tweet-button').click(newTweet);
+  $('#login-button').click(login);
+  $('#new-tweet-button').click(newTweet);
 }
 
 $(document).ready(initPage);

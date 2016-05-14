@@ -47,7 +47,7 @@ var generateRandomTweet = function(){
   addTweet(tweet);
 };
 
-for(var i = 0; i < 10; i++){
+for(var i = 0; i < 5; i++){
   generateRandomTweet();
 }
 
@@ -66,5 +66,6 @@ var writeTweet = function(message){
   var tweet = {};
   tweet.user = visitor;
   tweet.message = message;
+  tweet.created_at = new Date();
   addTweet(tweet);
 };

@@ -20,11 +20,11 @@ function showTweet(tweet) {
 }
 
 function initTweets(num) {
-  var recent = _.last(streams.home, num);
+  var recent = _.last(streams.home, num).reverse();
   _.each(recent, showTweet);
 }
 
-var moreTweets = function (event) {
+function moreTweets(event) {
   $('#tweets').empty();
   initTweets(12);
 }
@@ -46,8 +46,8 @@ function login() {
 function newTweet() {
   var $newTweet = $('#new-tweet');
   var message = $newTweet.val();
+  $newTweet.val('');
   writeTweet(message);
-  $newTweet.prop('value', 'Whats happening?');
 }
 
 function initPage(){

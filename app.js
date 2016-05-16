@@ -12,8 +12,9 @@ function showTweet(tweet) {
   var $tweets = $('#tweets');
   var $tweet = $('<tr class =' + randomColor() + '></tr>');
   var time = tweet.created_at;
+  var user = tweet.user;
   var timeFromNow = moment(tweet.created_at).fromNow();
-  $tweet.html('<td>@' + tweet.user + ': <span>\
+  $tweet.html('<td><a class="user" data-user="' + user + '">@' + user + ':</a> <span>\
     <small class="time text-muted" time="' + time + '">' + timeFromNow + '</small></span></td>\
     <td>' + tweet.message + '</td>');
   $tweet.appendTo($tweets);
@@ -24,7 +25,7 @@ function initTweets(num) {
   _.each(recent, showTweet);
 }
 
-function moreTweets(event) {
+function moreTweets() {
   $('#tweets').empty();
   initTweets(12);
 }
@@ -50,6 +51,12 @@ function newTweet() {
   writeTweet(message);
 }
 
+function displayTimeline(e) {
+  var user = $(e.target).data('user');
+  $('#tweet-container').hide();
+  console.log(user);
+}
+
 function initPage(){
 
   function appendElements() {
@@ -60,7 +67,7 @@ function initPage(){
   var $header = $('<div class="container"><div class="page-header col-sm-8"><h1>Twittler\
     <small>  a place for twits</small></h1></div><div class="container col-sm-4">\
     <img src="twit.jpg"></div></div>');
-  var $tweetContainer = $('<div class="container"><div class="table-responsive"><table class="table">\
+  var $tweetContainer = $('<div class="container" id="tweet-container"><div class="table-responsive"><table class="table">\
     <tbody id="tweets"></tbody><table></div></div>');
   var $features = $('<br><div class="container"><form class="form-inline"><div class="form-group">\
     <input class="btn btn-default" id="more" type="button" value="Load More"></div>\
@@ -81,6 +88,7 @@ function initPage(){
   $('#more').click(moreTweets);
   $('#login-button').click(login);
   $('#new-tweet-button').click(newTweet);
+  $('.user').click(displayTimeline);
 }
 
 $(document).ready(initPage);

@@ -8,13 +8,26 @@ randomColor.last = null;
 
 function showTweet(tweet) {
   const $tweets = $('#tweets');
-  let $tweet = $('<tr class =' + randomColor() + '></tr>');
+  let $tweet = $(`<tr class =${randomColor()}></tr>`);
   let time = tweet.created_at;
   let user = tweet.user;
+  let message = tweet.message;
   let timeFromNow = moment(tweet.created_at).fromNow();
-  $tweet.html('<td><a class="user" data-user="' + user + '" data-toggle="modal" data-target="#myModal">@' + user + ':</a> <span>\
-    <small class="time text-muted" time="' + time + '">' + timeFromNow + '</small></span></td>\
-    <td>' + tweet.message + '</td>');
+  $tweet.html(`
+    <td>
+      <a class="user" data-user=${user} data-toggle="modal" data-target="#myModal">
+        @${user}:
+      </a>
+      <span>
+        <small class="time text-muted" time="${time}">
+          ${timeFromNow}
+        </small>
+      </span>
+    </td>
+    <td>
+      ${message}
+    </td>
+  `);
   $tweet.appendTo($tweets);
 }
 
@@ -62,11 +75,30 @@ function displayTimeline(e) {
   _.each(stream, function(tweet) {
     let day = moment(tweet.created_at).format('dddd, MMMM Do');
     let time = moment(tweet.created_at).format('h:mm a');
-    let $message = $('<tr><td>' + tweet.message + ' <small class="text-muted">' + time + '</small></td></tr>');
+    let message = tweet.message;
+    let $message = $(`
+      <tr>
+        <td>
+          ${message}
+          <small class="text-muted">
+            ${time}
+          </small>
+        </td>
+      </tr>
+    `);
     if (day !== currentDay) {
       dayId = day.replace(/\s|\,/g, '');
-      $table = $('<div class="table-responsive"><h4>' + day + '</h4><table class="table">\
-        <tbody id="timeline-' + dayId + '"></tbody></table></div>');
+      $table = $(`
+        <div class="table-responsive">
+          <h4>
+            ${day}
+          </h4>
+          <table class="table">
+            <tbody id="timeline-${dayId}">
+            </tbody>
+          </table>
+        </div>
+      `);
       $table.appendTo($modalBody);
       currentDay = day;
     }
